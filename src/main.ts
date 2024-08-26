@@ -25,7 +25,10 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: ['http://localhost:4321', 'https://ghost-cloud.vercel.app'],
+    origin: [
+      'http://localhost:4321',
+      'https://ghost-cloud-frontend.vercel.app',
+    ],
     credentials: true,
   });
   app.use(
