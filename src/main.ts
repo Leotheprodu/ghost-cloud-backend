@@ -28,6 +28,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:4321',
       'https://ghost-cloud-frontend.vercel.app',
+      'https://www.ghostcloud.pro',
+      'https://ghostcloud.pro',
     ],
     credentials: true,
   });
