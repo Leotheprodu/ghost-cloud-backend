@@ -215,7 +215,7 @@ export class ServicesController {
     }
   }
 
-  @Get('instances/:id')
+  @Get('user-instances/:id')
   @UseGuards(IsNotLoggedInGuard)
   async getServiceInstanceController(
     @Res() res: Response,
@@ -224,7 +224,7 @@ export class ServicesController {
   ) {
     try {
       // NOTE es posible que se necesite un middleware para verificar si el usuario tiene permisos similar a esto
-      if (!session.services.includes(id)) {
+      if (session.userId !== id) {
         if (!session.roles.includes(userRoles.Admin.id)) {
           throw new HttpException(
             'You do not have the permission to access this resource',
