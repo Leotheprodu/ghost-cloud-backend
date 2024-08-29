@@ -7,6 +7,7 @@ import {
   groupCampainEmailService,
   tokenCampainEmailService,
 } from 'config/constants';
+import { catchHandle } from 'src/chore/utils/catchHandle';
 @Injectable()
 export class EmailService {
   constructor(
@@ -35,7 +36,7 @@ export class EmailService {
         context,
       });
     } catch (error) {
-      throw new Error('Error sending email');
+      catchHandle(error);
     }
   }
   async sendEmailVerification(email: string) {
@@ -54,14 +55,15 @@ export class EmailService {
         await this.sendEmail({
           email,
           subject: 'verifique su correo electronico',
+          from: `"Ghost Cloud" <${process.env.EMAIL_USERNAME}>`,
           template: 'user-sign_up',
           context: {
             link: `${frontEndUrl}/verificar-email?token=${token}`,
           },
         });
       }
-    } catch (error) {
-      throw new Error('Error sending email');
+    } catch (e) {
+      catchHandle(e);
     }
   }
 
